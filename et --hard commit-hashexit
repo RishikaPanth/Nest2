@@ -1,0 +1,113 @@
+[33mcommit fc93cbcc65e8242cbfcbcf2b7e810b3484fd77f2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Fri Sep 27 11:53:10 2024 +0530
+
+    Revert "."
+    
+    This reverts commit faf844e9acc6852a61410d61b252b6599edd6ad5.
+
+[33mcommit faf844e9acc6852a61410d61b252b6599edd6ad5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Fri Sep 27 11:22:57 2024 +0530
+
+    .
+    
+    .
+
+[33mcommit d6954c9767bee2a52135be639f09338e8ba24675[m[33m ([m[1;31mupstream/main[m[33m, [m[1;31mupstream/HEAD[m[33m)[m
+Author: rishabh132003 <103423564+rishabh132003@users.noreply.github.com>
+Date:   Tue Sep 24 13:33:27 2024 +0530
+
+    Update models.py
+
+[33mcommit b27c1220bdc28a07710b1b0ab3adfab641491e05[m
+Merge: 17b76b5 e849bbe
+Author: rishabh132003 <103423564+rishabh132003@users.noreply.github.com>
+Date:   Tue Sep 24 13:29:10 2024 +0530
+
+    Resolved merge conflicts
+
+[33mcommit 17b76b5f44b9dcca73d69db900a8ca8d0af3cf6d[m
+Author: rishabh132003 <103423564+rishabh132003@users.noreply.github.com>
+Date:   Tue Sep 24 13:23:02 2024 +0530
+
+    Updated app: modified existing files, added new templates, and removed unused migrations
+
+[33mcommit e849bbe5c06599d31d5a699f60179c9de2c60fe9[m
+Merge: d22b8ee 06596c6
+Author: RishikaPanth <144208499+RishikaPanth@users.noreply.github.com>
+Date:   Tue Sep 24 12:02:45 2024 +0530
+
+    Merge pull request #4 from RishikaPanth/main
+    
+    Reward System NEST-17
+
+[33mcommit 06596c69883d04723fd69a1b2dc34a055ba4db02[m
+Merge: 4cc8fc1 3b2e08f
+Author: RishikaPanth <144208499+RishikaPanth@users.noreply.github.com>
+Date:   Sun Sep 22 23:01:16 2024 +0530
+
+    Merge pull request #3 from RishikaPanth/main
+    
+    Reward System NEST-17
+
+[33mcommit 3b2e08f60a3f62985fa9bf15fcd3b5c406f0bfb1[m
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Sun Sep 22 23:00:24 2024 +0530
+
+    Reward System NEST-17
+    
+    Reward System NEST-17
+
+[33mcommit 4cc8fc1ac7dc7815819f2f6fcb9dd1ba6958fd9a[m
+Merge: d22b8ee 5edabbb
+Author: RishikaPanth <144208499+RishikaPanth@users.noreply.github.com>
+Date:   Sun Sep 22 22:11:33 2024 +0530
+
+    Merge pull request #2 from RishikaPanth/main
+    
+    user management NEST-41
+
+[33mcommit 5edabbb8c919af831c978dcf5ee9e51dff284c1e[m
+Merge: a26e24d d22b8ee
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Sun Sep 22 22:08:38 2024 +0530
+
+    Merge branch 'main' of https://github.com/RishikaPanth/Nest2
+
+[33mcommit a26e24d31115e916b66b5895c9530b200cd53928[m
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Sun Sep 22 22:08:34 2024 +0530
+
+    user management  NEST-41
+    
+    user management  NEST-41
+
+[33mcommit d22b8eeca1776eb3599deff8b3a63a3dec88d9b6[m
+Merge: 5bc6a81 efbb9f0
+Author: RishikaPanth <144208499+RishikaPanth@users.noreply.github.com>
+Date:   Sun Sep 22 20:18:12 2024 +0530
+
+    Merge pull request #1 from RishikaPanth/main
+    
+    upvote
+
+[33mcommit efbb9f0c1858b2e9925c77e5b964474156e2f1db[m
+Author: RishikaPanth <rishikapanth02@gmail.com>
+Date:   Sun Sep 22 20:08:08 2024 +0530
+
+    upvote
+    
+    I added the upvote feature
+
+[33mcommit 5bc6a81f8e36ca57c515c050e06f359d826b4b59[m
+Author: Rishabh Bhnadari <rishabhbhandari@Rishabhs-MacBook-Air.local>
+Date:   Sat Sep 21 13:39:28 2024 +0530
+
+    Updated Django project with new features/fixes
+
+[33mcommit 5c2a78327f381263c3a472a47b8459f0a0703f00[m
+Author: Rishabh Bhnadari <rishabhbhandari@Rishabhs-MacBook-Air.local>
+Date:   Thu Sep 5 21:44:23 2024 +0530
+
+    Initial commit for Django project
