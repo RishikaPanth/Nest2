@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS.append('nest-r040.onrender.com')
 # Application definition
 
 INSTALLED_APPS = [
