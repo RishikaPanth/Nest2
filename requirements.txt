@@ -32,6 +32,7 @@ google-cloud-vision==3.7.4
 googleapis-common-protos==1.63.2
 grpcio==1.65.4
 grpcio-status==1.65.4
+gunicorn==23.0.0
 idna==3.7
 imageio==2.34.2
 itsdangerous==2.2.0
