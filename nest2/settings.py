@@ -19,9 +19,9 @@ import dj_database_url
 
 # Cloudinary configuration
 cloudinary.config( 
-    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME"),  # Set as environment variables
-    api_key = os.environ.get("CLOUDINARY_API_KEY"), 
-    api_secret = os.environ.get("CLOUDINARY_API_SECRET"), 
+    cloud_name = 'dmwgwtfl1',  # Set as environment variables
+    api_key = '377232798291922', 
+    api_secret = 'lKrhqrO14hkDV2c9ZZ4itw_a-7M', 
     secure=True
 )
 
