@@ -44,7 +44,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
 ALLOWED_HOSTS.append('nest-r040.onrender.com')
 # Application definition
 
@@ -110,8 +110,21 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # Change this to the correct backend
+#         'NAME': 'nest_ctir',  # Database name
+#         'USER': 'nest_ctir_user',  # Database user
+#         'PASSWORD': 'WG17yiquczWOABhREhDNH90MBXWOgDtz',  # Database password
+#         'HOST': 'dpg-crvcav1u0jms73aord70-a.singapore-postgres.render.com',  # Database host
+#         'PORT': '5432',  # Default PostgreSQL port
+#     }
+# }
+
+
 database_url = os.environ.get("DATABASE_URL")
 DATABASES['default'] = dj_database_url.parse(database_url)
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
