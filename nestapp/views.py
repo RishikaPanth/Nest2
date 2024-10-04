@@ -48,7 +48,7 @@ def upload_note_view(request):
             if uploaded_file:  # Check if the file exists
                 try:
                     # Upload the file to Cloudinary
-                    cloudinary_response = uploader.upload(uploaded_file)
+                    cloudinary_response = uploader.upload(uploaded_file , resource_type="raw")
                     
                     # Save the URL of the uploaded file to your model
                     note.file = cloudinary_response['secure_url']  # Save the Cloudinary URL to the note
