@@ -112,6 +112,9 @@ def view_note(request, note_id):
     upvote_count = note.upvote_set.count()
     has_upvoted = note.upvote_set.filter(user=request.user).exists() if request.user.is_authenticated else False
 
+    # The PDF URL is the Cloudinary URL from the note's file field
+    pdf_url = note.file  # Assuming 'file' already holds the Cloudinary URL
+
     # Handle comment form submission
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -130,7 +133,7 @@ def view_note(request, note_id):
     context = {
         'note': note,
         'added_to_my_notes': added_to_my_notes,
-        'pdf_url': request.build_absolute_uri(note.file.url) if note.file else None,
+        'pdf_url': pdf_url,
         'upvote_count': upvote_count,
         'has_upvoted': has_upvoted,
         'comment_form': comment_form,

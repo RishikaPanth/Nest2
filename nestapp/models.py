@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 import uuid
 from django.contrib.auth.models import User
@@ -84,10 +84,11 @@ class Note(models.Model):
     branch = models.CharField(max_length=50, choices=BRANCH_CHOICES)
     description = models.TextField(blank=True, null=True)
     semester = models.IntegerField(choices=SEMESTER_CHOICES)
-    file = models.FileField(upload_to='notes/')
+    file = models.URLField(max_length=200)  # Updated to URLField for Cloudinary URL
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     upload_date = models.DateTimeField(auto_now_add=True)
+
 
     def check_and_award_badge(self):
         """Check if this note has reached 1 upvotes and award a badge."""
