@@ -84,7 +84,8 @@ class Note(models.Model):
     branch = models.CharField(max_length=50, choices=BRANCH_CHOICES)
     description = models.TextField(blank=True, null=True)
     semester = models.IntegerField(choices=SEMESTER_CHOICES)
-    file = models.URLField(max_length=200)  # Updated to URLField for Cloudinary URL
+    file = models.FileField(storage=MediaCloudinaryStorage())
+    # file = models.FileField(upload_to='notes/')
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     upload_date = models.DateTimeField(auto_now_add=True)

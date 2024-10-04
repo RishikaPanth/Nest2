@@ -103,27 +103,27 @@ WSGI_APPLICATION = 'nest2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # This creates an SQLite database file in your project's base directory
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',  # Change this to the correct backend
-#         'NAME': 'nest_ctir',  # Database name
-#         'USER': 'nest_ctir_user',  # Database user
-#         'PASSWORD': 'WG17yiquczWOABhREhDNH90MBXWOgDtz',  # Database password
-#         'HOST': 'dpg-crvcav1u0jms73aord70-a.singapore-postgres.render.com',  # Database host
-#         'PORT': '5432',  # Default PostgreSQL port
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',  # This creates an SQLite database file in your project's base directory
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Change this to the correct backend
+        'NAME': 'nest_ctir',  # Database name
+        'USER': 'nest_ctir_user',  # Database user
+        'PASSWORD': 'WG17yiquczWOABhREhDNH90MBXWOgDtz',  # Database password
+        'HOST': 'dpg-crvcav1u0jms73aord70-a.singapore-postgres.render.com',  # Database host
+        'PORT': '5432',  # Default PostgreSQL port
+    }
+}
 
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
