@@ -54,9 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
-    'nestapp',
-    'cloudinary_storage',  # Add this app for Cloudinary storage
+    'nestapp', 
     'cloudinary',
 ]
 
