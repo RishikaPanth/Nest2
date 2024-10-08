@@ -16,6 +16,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Note, MyNotes, Upvote, Comment  # Import Comment model
 from .forms import CommentForm  # Import CommentForm
 from django.shortcuts import render
+from django.contrib import messages
 
 def landingpage(request):
     return render(request, 'index.html')
