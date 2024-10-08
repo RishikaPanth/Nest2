@@ -11,6 +11,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from cloudinary_storage.storage import MediaCloudinaryStorage
+import dj_database_url
+
+# Cloudinary configuration
+cloudinary.config( 
+    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME"),  # Set as environment variables
+    api_key = os.environ.get("CLOUDINARY_API_KEY"), 
+    api_secret = os.environ.get("CLOUDINARY_API_SECRET"), 
+    secure=True
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME' : os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    'API_KEY' : os.environ.get("CLOUDINARY_API_KEY"),
+    'API_SECRET' : os.environ.get("CLOUDINARY_API_SECRET"), 
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +39,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3_2yrtuurh22a1kh9mpl3q6)!@x-^rq3w&!j5cyvflkm4cqg%y'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
+ALLOWED_HOSTS.append('nest-r040.onrender.com')
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,8 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
-    'nestapp',
+    'nestapp', 
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +70,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-
 
 ROOT_URLCONF = 'nest2.urls'
 
@@ -75,9 +94,8 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'nestapp/static'),  # Update this path
+    os.path.join(BASE_DIR, 'nestapp/static'),
 ]
-
 
 WSGI_APPLICATION = 'nest2.wsgi.application'
 
@@ -87,17 +105,25 @@ WSGI_APPLICATION = 'nest2.wsgi.application'
 
 DATABASES = {
     'default': {
-    # 'ENGINE': 'django.db.backends.postgresql',
-    # 'NAME': 'postgres',
-    # 'USER': 'masteruser',
-    # 'PASSWORD': '*Rbj132003',
-    # 'HOST': 'nest.cluster-cjy68qemoppy.eu-north-1.rds.amazonaws.com',  # Writer endpoint
-    # 'PORT': '5432'
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',  # This creates an SQLite database file in your project's base directory
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # Change this to the correct backend
+#         'NAME': 'nest_ctir',  # Database name
+#         'USER': 'nest_ctir_user',  # Database user
+#         'PASSWORD': 'WG17yiquczWOABhREhDNH90MBXWOgDtz',  # Database password
+#         'HOST': 'dpg-crvcav1u0jms73aord70-a.singapore-postgres.render.com',  # Database host
+#         'PORT': '5432',  # Default PostgreSQL port
+#     }
+# }
+
+
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -117,7 +143,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -129,15 +154,20 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'nestapp/static'),  # Update this path
+    os.path.join(BASE_DIR, 'nestapp/static'),
 ]
 
+# Cloudinary Media Storage settings
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# These lines are required when using Cloudinary for media storage
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Local storage for development
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -148,17 +178,10 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'landingpage'
 LOGOUT_REDIRECT_URL = 'login/'
 
+# Custom user model
+AUTH_USER_MODEL = 'nestapp.NestUser'
 
-# Add these lines to the bottom of your settings.py file
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# settings.py
-AUTH_USER_MODEL = 'nestapp.NestUser'  # Replace 'myapp' with the actual name of your app
-
-# settings.py
+# Authentication backends
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
