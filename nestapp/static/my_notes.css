@@ -1,0 +1,55 @@
+/* notes.css */
+
+/* General styling */
+body {
+    background-color: #f4f6f9;
+}
+
+/* My Notes Section */
+.my-notes-section {
+    padding: 60px 0;
+    background-color: #faf5ef;
+}
+
+.my-notes-section h1 {
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.note-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.note-card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.note-subject {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #212529;
+}
+
+.note-details {
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 15px;
+}
+
+.no-notes {
+    color: #6c757d;
+}
+
+.no-notes p {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
