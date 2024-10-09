@@ -7,7 +7,7 @@ from PyPDF2 import PdfReader
 
 from django.core.files.storage import FileSystemStorage
 from .models import Note , MyNotes ,  Upvote
-
+import time  # Import the time module for generating timestamps
 ###
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -96,6 +96,7 @@ def search_notes_view(request):
     branch = request.GET.get('branch', '')
     semester = request.GET.get('semester', '')
 
+    # Filter the notes based on the search criteria
     notes = Note.objects.filter(is_approved=True)
 
     if keyword:
@@ -107,6 +108,18 @@ def search_notes_view(request):
     if semester:
         notes = notes.filter(semester=int(semester))
 
+    # Generate a single timestamp for cache-busting
+    timestamp = int(time.time())
+
+    # Iterate over each note to add `pdf_url` and `timestamp`
+    for note in notes:
+        # Ensure that the `file` field returns the correct URL
+        # If `file` is a Cloudinary URL, it might already be a string
+        # Otherwise, use `note.file.url` if `file` is a FileField/ImageField
+        note.pdf_url = note.file if isinstance(note.file, str) else note.file.url
+        note.timestamp = timestamp
+
+    # Pass the notes and other filters to the context
     context = {
         'notes': notes,
         'branches': branches,
