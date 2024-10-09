@@ -45,15 +45,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
-ALLOWED_HOSTS.append('127.0.0.1')
-ALLOWED_HOSTS.append('localhost')
 ALLOWED_HOSTS.append('nest-r040.onrender.com')
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
-
 # Application definition
 
 INSTALLED_APPS = [
-    'nestapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',
     'django.contrib.staticfiles',
-    
+    'nestapp', 
     'cloudinary',
 ]
 
@@ -98,9 +93,9 @@ TEMPLATES = [
     },
 ]
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'nestapp/static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'nestapp/static'),
+]
 
 WSGI_APPLICATION = 'nest2.wsgi.application'
 
@@ -108,20 +103,27 @@ WSGI_APPLICATION = 'nest2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Change this if using another database
-        'NAME': BASE_DIR / 'db.sqlite3',         # Database file location
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # This creates an SQLite database file in your project's base directory
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # Change this to the correct backend
+#         'NAME': 'nest_ctir',  # Database name
+#         'USER': 'nest_ctir_user',  # Database user
+#         'PASSWORD': 'WG17yiquczWOABhREhDNH90MBXWOgDtz',  # Database password
+#         'HOST': 'dpg-crvcav1u0jms73aord70-a.singapore-postgres.render.com',  # Database host
+#         'PORT': '5432',  # Default PostgreSQL port
+#     }
+# }
 
 
-
-# database_url = os.environ.get("DATABASE_URL")
-
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -184,17 +186,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
 
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'  # For Gmail, for example
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'nestapp.noreply@gmail.com'  # Your actual email
-# EMAIL_HOST_PASSWORD = 'mcso cbkp pnbb wgqz'  # Your email password or app-specific password
-# DEFAULT_FROM_EMAIL = 'nestapp.noreply@gmail.com'
-
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail, for example
 EMAIL_PORT = 587
@@ -202,4 +193,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nestapp.noreply@gmail.com'  # Your actual email
 EMAIL_HOST_PASSWORD = 'mcso cbkp pnbb wgqz'  # Your email password or app-specific password
 DEFAULT_FROM_EMAIL = 'nestapp.noreply@gmail.com'
-
