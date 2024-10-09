@@ -87,10 +87,10 @@
         <p><strong>Description:</strong> {{ note.description }}</p>
 
         <!-- Full note preview -->
-        <embed src="{{ pdf_url }}" type="application/pdf" />
+        <embed src="{{ pdf_url }}?{{ timestamp }}" type="application/pdf" />
 
         <!-- Download Button -->
-        <a href="{{ pdf_url }}" download class="button">Download Note</a>
+        <a href="{{ pdf_url }}?{{ timestamp }}" download class="button">Download Note</a>
 
         <!-- Upvote Count -->
         <p><strong>Upvotes:</strong> {{ upvote_count }}</p>
