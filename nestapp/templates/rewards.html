@@ -20,7 +20,7 @@
                     <div class="card mb-4">
                         <img src="{{ badge.image.url }}" class="card-img-top" alt="{{ badge.name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ badge.name }}</h5>
+                            <h5 class="card-title">{{ badge.get_badge_type_display }}</h5>
                             <p class="card-text">{{ badge.description }}</p>
                         </div>
                     </div>
