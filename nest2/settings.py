@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'your_app.middleware.NoCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'nest2.urls'
