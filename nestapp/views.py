@@ -281,7 +281,7 @@ def profile_view(request):
 def rewards_view(request):
     # Fetch the user's badges from the database
     # Assuming you have a UserProfile model or similar to store badges
-    badges = request.user.userprofile.badges.all()  # Adjust according to your data model
+    badges = request.user.badges.all() # Adjust according to your data model
     
     context = {
         'badges': badges,
