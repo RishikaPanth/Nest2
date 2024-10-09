@@ -5,6 +5,8 @@ from django.contrib.auth.views import LogoutView  # Import LogoutView from auth.
 from . import views  # Import your own views
 from .views import upload_note_view , my_notes , my_orders , order_detail
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import views as auth_views
+from .views import rewards_view
 
 ####
 from . import views
@@ -28,5 +30,25 @@ urlpatterns = [
     path('order_detail/<int:order_id>/', views.order_detail, name='order_detail'),
     path('profile/', views.profile_view, name='profile'), 
     path('downloaded_notes/', views.downloaded_notes_view, name='downloaded_notes'),
+    path('rewards/', rewards_view, name='rewards'),
+  # Password reset URL patterns
+   path('password_reset/', auth_views.PasswordResetView.as_view(
+        template_name='registration/password_reset_form.html',
+        email_template_name='registration/password_reset_email.html',
+        subject_template_name='registration/password_reset_subject.txt',
+        success_url='/password_reset/done/'
+    ), name='password_reset'),
+
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
+        template_name='registration/password_reset_done.html'
+    ), name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='registration/password_reset_confirm.html',
+    ), name='password_reset_confirm'),
+
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='registration/password_reset_complete.html'
+    ), name='password_reset_complete'),
 ]
 

@@ -276,3 +276,15 @@ def profile_view(request):
     }
 
     return render(request, 'profile.html', context)
+
+@login_required
+def rewards_view(request):
+    # Fetch the user's badges from the database
+    # Assuming you have a UserProfile model or similar to store badges
+    badges = request.user.userprofile.badges.all()  # Adjust according to your data model
+    
+    context = {
+        'badges': badges,
+    }
+    
+    return render(request, 'rewards.html', context)  # Create rewards.html template
