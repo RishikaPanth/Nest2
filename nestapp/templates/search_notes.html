@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Search Notes - NEST{% endblock %}
+
+{% block content %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,91 +10,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Notes</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'searchnotes.css' %}">
-    <style>
-        /* Add your CSS styles here */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 </head>
 <body>
-    <header>
-        <!-- Include your navigation bar here -->
-        <nav>
-            <ul>
-                <li><a href="{% url 'landingpage' %}">Home</a></li>
-                <li><a href="{% url 'search_notes' %}">Search Notes</a></li>
-                <li><a href="{% url 'upload_note' %}">Upload Notes</a></li>
-                <!-- Add other navigation links -->
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h1>Search Notes</h1>
+    <!-- Navbar (same as index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'landingpage' %}">
+                <img src="#" alt="" class="me-2">
+                <span class="fw-bold">NEST</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'search_notes' %}">Search Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'order_printout' %}">Order Printout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'upload_note' %}">Upload Notes</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Rewards</a></li>
+                            <li><a class="dropdown-item" href="{% url 'my_orders' %}">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'my_notes' %}">My Notes</a></li>
+                            <li><a class="dropdown-item" href="#">Uploaded Notes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                                    {% csrf_token %}
+                                    <button type="submit">Logout</button>
+                                </form>
+                                <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-dark"><a href="{% url 'signup' %}" class="text-white text-decoration-none">Sign up</a></button>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Search Form -->
-        <form method="GET" action="{% url 'search_notes' %}" id="searchForm">
-            <input type="text" name="keyword" placeholder="Search notes..." value="{{ request.GET.keyword }}">
-            <button type="submit">Search</button>
-        </form>
+    <!-- Hero Section (Similar to index.html) -->
+    <section class="hero-section text-center py-5 px-0">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Search Notes</h1>
+            <p class="lead">Find the best notes and materials curated by top students in your field.</p>
+            <div class="search-bar mt-4">
+                <!-- Search Form -->
+                <form method="GET" action="{% url 'search_notes' %}" id="searchForm" class="d-flex">
+                    <input 
+                        type="text" 
+                        name="keyword" 
+                        class="form-control" 
+                        placeholder="search notes or subject" 
+                        value="{{ request.GET.keyword }}" 
+                        required
+                    >
+                    <button type="submit" class="btn btn-dark search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
+    <section class="container my-5">
         <!-- Filters -->
-        <form method="GET" action="{% url 'search_notes' %}" id="filterForm">
-            <label for="branch">Branch:</label>
-            <select id="branch" name="branch" onchange="submitFilterForm()">
-                <option value="">All Branches</option>
-                {% for branch in branches %}
-                <option value="{{ branch }}" 
-                    {% if branch == request.GET.branch %}
-                        selected
-                    {% elif not request.GET.branch and branch == user.branch %}
-                        selected
-                    {% endif %}>
-                    {{ branch }}
-                </option>
-                {% endfor %}
-            </select>
-
-            <label for="semester">Semester:</label>
-            <select id="semester" name="semester" onchange="submitFilterForm()">
-                <option value="">All Semesters</option>
-                {% for semester in semesters %}
-                <option value="{{ semester }}" {% if semester|stringformat:"i" == request.GET.semester %}selected{% endif %}>
-                    Semester {{ semester }}
-                </option>
-                {% endfor %}
-            </select>
+        <form method="GET" action="{% url 'search_notes' %}" id="filterForm" class="d-flex justify-content-around mb-4">
+            <div>
+                <label for="branch" class="me-2">Branch:</label>
+                <select id="branch" name="branch" class="form-select" onchange="submitFilterForm()">
+                    <option value="">All Branches</option>
+                    {% for branch in branches %}
+                    <option value="{{ branch }}" 
+                        {% if branch == request.GET.branch %}
+                            selected
+                        {% elif not request.GET.branch and branch == user.branch %}
+                            selected
+                        {% endif %}>
+                        {{ branch }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="semester" class="me-2">Semester:</label>
+                <select id="semester" name="semester" class="form-select" onchange="submitFilterForm()">
+                    <option value="">All Semesters</option>
+                    {% for semester in semesters %}
+                    <option value="{{ semester }}" {% if semester|stringformat:"i" == request.GET.semester %}selected{% endif %}>
+                        Semester {{ semester }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
         </form>
 
         <!-- Ad Placement -->
@@ -110,60 +146,44 @@
         <!-- Notes List -->
         <div class="notes-list">
             {% if notes %}
-                <ul>
+                <div class="row">
                     {% for note in notes %}
-                    <li>
-                        <a href="{% url 'view_note' note.id %}" class="note-card">
-                            <img src="{{ note.cover_image.url }}" alt="{{ note.subject }}" style="max-height: 150px; width: auto; border-radius: 10px; margin-bottom: 15px;">
-                            <h2>{{ note.subject }}</h2>
-                            <p><strong>Branch:</strong> {{ note.branch }}</p>
-                            <p><strong>Semester:</strong> Semester {{ note.semester }}</p>
-                            <p><strong>Description:</strong> {{ note.description|truncatewords:15 }}</p>
+                    <div class="col-md-4 mb-4">
+                        <a href="{% url 'view_note' note.id %}" class="text-decoration-none text-dark"> <!-- Wrap card in anchor tag -->
+                            <div class="card h-100">
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ note.subject }}</h5>
+                                    <p class="card-text"><strong>Branch:</strong> {{ note.branch }}</p>
+                                    <p class="card-text"><strong>Semester:</strong> Semester {{ note.semester }}</p>
+                                    <p class="card-text"><strong>Description:</strong> {{ note.description|truncatewords:15 }}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ note.file.url }}" class="btn btn-dark w-100" download>Download</a>
+                                </div>
+                            </div>
                         </a>
-                        <a href="{{ note.file.url }}" download>Download Note</a>
-                    </li>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             {% else %}
-                <p>No notes found.</p>
+                <p class="text-center">No notes found.</p>
             {% endif %}
         </div>
-        
-    </main>
+    </section>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <iframe id="noteFrame" style="width: 100%; height: 80vh;" frameborder="0"></iframe>
-        </div>
-    </div>
 
-    <footer>
-        <!-- Include your footer here -->
-        <p>&copy; 2024 Your Company</p>
-    </footer>
+    
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script>
         function submitFilterForm() {
             document.getElementById('filterForm').submit();
         }
-
-        function openModal(url) {
-            document.getElementById('noteFrame').src = url;
-            document.getElementById('myModal').style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = "none";
-        }
-
-        // Close the modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('myModal')) {
-                closeModal();
-            }
-        }
     </script>
+
 </body>
 </html>
+
+{% endblock %}

@@ -1,0 +1,197 @@
+/* General Styling */
+body {
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container */
+.container {
+    background: #faf5ef;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.table th, .table td {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Hover Effects on Table Rows */
+.table-striped tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Button Styling */
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #212529;
+    border-color: #1d2124;
+}
+
+/* Action Button */
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive Table and Other Elements Styling */
+
+/* Default Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Responsive Styling for Different Screen Sizes */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px; /* Adjust padding */
+        font-weight: bold;
+        text-align: left;
+        background-color: #f9f9f9;
+    }
+
+    .table td:last-child {
+        border-bottom: 0;
+    }
+
+    /* Adjust button and text sizes */
+    .btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 425px) {
+    .table tbody tr {
+        border-bottom: 2px solid #ddd;
+        padding: 0.5rem 0;
+    }
+
+    .table td::before {
+        padding-left: 12px;
+        font-size: 0.875rem; /* Decreased font size */
+    }
+
+    .table td {
+        padding-left: 40%;
+    }
+
+    /* Adjust button sizes */
+    .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    .table td::before {
+        font-size: 0.8rem;
+    }
+
+    .table td {
+        padding-left: 35%;
+    }
+
+    .btn {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 320px) {
+    .table tbody tr {
+        margin-bottom: 1.5rem;
+    }
+
+    .table td::before {
+        font-size: 0.75rem; /* Further decrease font size */
+    }
+
+    .table td {
+        padding-left: 30%;
+    }
+
+    .btn {
+        padding: 5px 8px;
+        font-size: 10px; /* Smaller button sizes */
+    }
+}

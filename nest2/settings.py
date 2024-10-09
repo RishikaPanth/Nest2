@@ -184,6 +184,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
 
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'  # For Gmail, for example
 # EMAIL_PORT = 587
@@ -192,4 +193,13 @@ AUTHENTICATION_BACKENDS = [
 # EMAIL_HOST_PASSWORD = 'mcso cbkp pnbb wgqz'  # Your email password or app-specific password
 # DEFAULT_FROM_EMAIL = 'nestapp.noreply@gmail.com'
 
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # For Gmail, for example
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nestapp.noreply@gmail.com'  # Your actual email
+EMAIL_HOST_PASSWORD = 'mcso cbkp pnbb wgqz'  # Your email password or app-specific password
+DEFAULT_FROM_EMAIL = 'nestapp.noreply@gmail.com'
 

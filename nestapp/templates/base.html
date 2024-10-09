@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'footer.css' %}"> <!-- Adjust the path based on your project structure -->
+</head>
+<body>
+    <!-- Header (if any) -->
+    
+    <!-- Main content block -->
+    {% block content %}
+    {% endblock %}
+    
+    <!-- Footer -->
+    <footer class="custom-footer text-center py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#!" class="footer-link">About Us</a></li>
+                        <li><a href="#!" class="footer-link">Careers</a></li>
+                        <li><a href="#!" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Get Help</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#!" class="footer-link">FAQ</a></li>
+                        <li><a href="#!" class="footer-link">Support</a></li>
+                        <li><a href="#!" class="footer-link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#!" class="footer-link">Email: support@nest.com</a></li>
+                        <li><a href="#!" class="footer-link">Phone: +123 456 7890</a></li>
+                        <li><a href="#!" class="footer-link">Address: 123 NEST St, City, Country</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2024 NEST. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -4,8 +4,21 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignupForm, NoteUploadForm, CommentForm, PrintOrderForm
 from .models import Note, MyNotes, Upvote, Order, Profile, DownloadedNotes
 from PyPDF2 import PdfReader
+
+from django.core.files.storage import FileSystemStorage
+from .models import Note , MyNotes ,  Upvote
+
+###
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Note, MyNotes, Upvote, Comment  # Import Comment model
+from .forms import CommentForm  # Import CommentForm
+from django.shortcuts import render
+from django.contrib import messages
+
 from datetime import datetime
 from cloudinary import uploader  # Import the uploader module
+
 
 def landingpage(request):
     return render(request, 'index.html')
