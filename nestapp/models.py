@@ -38,7 +38,6 @@ class CustomUserManager(BaseUserManager):
 class NestUser(AbstractBaseUser, PermissionsMixin):
     
 
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     BRANCH_CHOICES = [
         ('CSE', 'Computer Science Engineering'),
         ('ECE', 'Electronics and Communication Engineering'),
@@ -108,16 +107,7 @@ class MyNotes(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.note.subject}'
-class DownloadedNotes(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Use AUTH_USER_MODEL
-    note = models.ForeignKey(Note, on_delete=models.CASCADE)  # Link to the Note model
-    
-    note_title = models.CharField(max_length=200)
-    file = models.FileField(upload_to='downloaded_notes/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.note_title
 
 class PickupLocation(models.Model):
     name = models.CharField(max_length=100)
@@ -161,6 +151,7 @@ class Order(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_OPTIONS, default='processing')
     order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    pricing_id = models.ForeignKey(PrintPricing, on_delete=models.SET_NULL, null=True)
 
     def calculate_price(self):
         pricing = PrintPricing.objects.last()
@@ -207,17 +198,6 @@ class Badge(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.badge_type}'
-
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True, null=True)
-    dob = models.DateField(null=True, blank=True)
-    semester = models.IntegerField(null=True, blank=True)
-    year = models.IntegerField(null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='profiles/', null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username
 
 # Comment model for user comments on notes
 class Comment(models.Model):
