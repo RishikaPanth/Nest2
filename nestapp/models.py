@@ -38,6 +38,7 @@ class CustomUserManager(BaseUserManager):
 class NestUser(AbstractBaseUser, PermissionsMixin):
     
 
+
     BRANCH_CHOICES = [
         ('CSE', 'Computer Science Engineering'),
         ('ECE', 'Electronics and Communication Engineering'),

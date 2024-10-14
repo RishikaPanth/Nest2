@@ -29,7 +29,6 @@ urlpatterns = [
     path('my_orders/', views.my_orders, name='my_orders'),
     path('order_detail/<int:order_id>/', views.order_detail, name='order_detail'),
     path('profile/', views.profile_view, name='profile'), 
-    path('downloaded_notes/', views.downloaded_notes_view, name='downloaded_notes'),
     path('rewards/', rewards_view, name='rewards'),
   # Password reset URL patterns
    path('password_reset/', auth_views.PasswordResetView.as_view(

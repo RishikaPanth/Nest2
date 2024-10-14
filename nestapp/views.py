@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm, NoteUploadForm, CommentForm, PrintOrderForm
-from .models import Note, MyNotes, Upvote, Order, Profile, DownloadedNotes
+from .models import Note, MyNotes, Upvote, Order
 from PyPDF2 import PdfReader
 
 from django.core.files.storage import FileSystemStorage
