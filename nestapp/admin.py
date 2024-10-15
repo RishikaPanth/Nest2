@@ -32,6 +32,18 @@ class UserAdmin(admin.ModelAdmin):
         self.message_user(request, "Selected users have been deactivated.")
     deactivate_users.short_description = "Deactivate selected users"
 
+     # Custom action to make users superusers
+    def make_superuser(self, request, queryset):
+        queryset.update(is_superuser=True, is_staff=True)
+        self.message_user(request, "Selected users have been made superusers.")
+    make_superuser.short_description = "Make selected users superusers"
+
+    # Custom action to make users staff
+    def make_staff(self, request, queryset):
+        queryset.update(is_staff=True)
+        self.message_user(request, "Selected users have been made staff members.")
+    make_staff.short_description = "Make selected users staff members"
+
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
     list_display = ('subject', 'branch', 'semester', 'uploaded_by', 'is_approved', 'upload_date', 'view_note')
