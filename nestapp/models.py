@@ -55,7 +55,7 @@ class NestUser(AbstractBaseUser, PermissionsMixin):
     semester = models.IntegerField(null=True, blank=True) 
     year = models.IntegerField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    notes = models.ManyToManyField('Note', related_name='added_by_users')
+    notes = models.ManyToManyField('Note', related_name='added_by_users',blank=True)
     badges = models.ManyToManyField('Badge', blank=True)  # Add badges here
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
