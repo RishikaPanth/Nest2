@@ -130,7 +130,7 @@
     <div class="container">
         <h1>Profile Page</h1>
         <div class="profile-card">
-            <!-- Profile Picture Section -->
+            <!-- Profile Picture Section
             <div class="profile-picture">
                 <img src="{{ profile_picture.url|default:'{% static "default_profile.jpg" %}' }}" alt="Profile Picture">
                 <form method="POST" enctype="multipart/form-data" class="upload-form">
@@ -138,7 +138,8 @@
                     <input type="file" id="upload" name="profile_picture" style="display:none;">
                     <label for="upload" class="upload-btn">Change Picture</label>
                 </form>
-            </div>
+            </div> -->
+            <p>Username : {{ username }}</p>
 
             <!-- Profile Information Form -->
             <form class="profile-form" method="POST" enctype="multipart/form-data">

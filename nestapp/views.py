@@ -182,10 +182,6 @@ def add_to_my_notes(request, note_id):
     # Redirect back to the view_note page after adding the note
     return redirect('view_note', note_id=note.id)
 
-@login_required
-def downloaded_notes_view(request):
-    downloaded_notes = DownloadedNotes.objects.filter(user=request.user)
-    return render(request, 'downloaded_notes.html', {'downloaded_notes': downloaded_notes})
 
 @login_required
 def my_notes(request):
@@ -238,11 +234,11 @@ def order_detail(request, order_id):
 @login_required
 def profile_view(request):
     user = request.user
-    profile, created = Profile.objects.get_or_create(user=user)
+    # profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
-        user.full_name = full_name if full_name else user.username
+        user.full_name = full_name
 
         # Handle date of birth parsing to ensure correct format
         dob_str = request.POST.get('dob')
@@ -258,8 +254,6 @@ def profile_view(request):
                     'year': request.POST.get('year'),
                     'branch': request.POST.get('branch'),
                     'email': request.POST.get('email'),
-                    'bio': request.POST.get('bio'),
-                    'profile_picture': profile.profile_picture.url if profile.profile_picture else None,
                 })
 
         user.semester = request.POST.get('semester')
@@ -268,24 +262,16 @@ def profile_view(request):
         user.email = request.POST.get('email')
         user.save()
 
-        # Update profile-specific information
-        profile.bio = request.POST.get('bio')
-        profile_picture = request.FILES.get('profile_picture')
-        if profile_picture:
-            profile.profile_picture = profile_picture
-        profile.save()
-
         return redirect('profile')
 
     context = {
-        'full_name': user.full_name if user.full_name else user.username,
+        'username': user.username,
+        'full_name': user.full_name,
         'dob': user.dob.strftime('%Y-%m-%d') if user.dob else '',
         'semester': user.semester,
         'year': user.year,
         'branch': user.branch,
         'email': user.email,
-        'bio': profile.bio,
-        'profile_picture': profile.profile_picture.url if profile.profile_picture else None,
     }
 
     return render(request, 'profile.html', context)
